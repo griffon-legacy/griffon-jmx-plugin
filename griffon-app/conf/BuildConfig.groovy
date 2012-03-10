@@ -4,9 +4,7 @@ griffon.project.dependency.resolution = {
     }
     log "warn" // log level of Ivy resolver, either 'error', 'warn', 'info', 'debug' or 'verbose'
     repositories {
-        griffonPlugins()
         griffonHome()
-        griffonCentral()
 
         // uncomment the below to enable remote dependency resolution
         // from public Maven repositories
@@ -32,4 +30,16 @@ griffon {
     }
 }
 
-griffon.jars.destDir='target/addon'
+log4j = {
+    // Example of changing the log pattern for the default console
+    // appender:
+    appenders {
+        console name: 'stdout', layout: pattern(conversionPattern: '%d [%t] %-5p %c - %m%n')
+    }
+
+    error 'org.codehaus.griffon',
+          'org.springframework',
+          'org.apache.karaf',
+          'groovyx.net'
+    warn  'griffon'
+}
